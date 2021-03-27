@@ -57,14 +57,14 @@ def get_word_counts(text):
 
 
 def get_lang_scores(text):
-    count = get_word_counts(text)
+    count = get_word_counts(text.lower())
     # make scores sum up to 1
     total = sum(v for k, v in count.items())
     return {k: v / total for k, v in count.items()}
 
 
 def predict_lang(text):
-    scores = get_lang_scores(text)
+    scores = get_lang_scores(text.lower())
     top = max(v for k, v in scores.items())
     return [k for k, v in scores.items() if v == top]
 
