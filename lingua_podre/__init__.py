@@ -33,7 +33,7 @@ def load_wordlist(paths):
                     continue
                 with open(join(path, f)) as wrdlist:
                     lang_code = lang_codes[lang_name]
-                    words[lang_code] = wrdlist.read().split("\n")
+                    words[lang_code] = wrdlist.read().lower().split("\n")
     return words
 
 
