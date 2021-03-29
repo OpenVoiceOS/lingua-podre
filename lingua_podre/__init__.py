@@ -13,7 +13,7 @@ except:
              'fr': 'french', 'de': 'german', 'gu': 'gujarati', 'he': 'hebrew',
              'hi': 'hindi', 'hu': 'hungarian', 'id': 'indonesian',
              'ms': 'malaysian', 'it': 'italian', 'nb': 'norwegian',
-             'pl': 'polish',  'pt': 'portuguese', 'ro': 'romanian',
+             'pl': 'polish', 'pt': 'portuguese', 'ro': 'romanian',
              'ru': 'russian', 'sk': 'slovak', 'es': 'spanish',
              'sv': 'swedish', 'tr': 'turkish', 'uk': 'ukrainian',
              'vi': 'vietnamese'}
@@ -42,9 +42,14 @@ wordlists = [join(dirname(__file__), "res", "stopwords"),
 stopwords = load_wordlist(wordlists)
 
 
+def tokenize(text):
+    text = text.lower()
+    return text.split(" ")
+
+
 def get_word_counts(text):
     if isinstance(text, str):
-        text = text.split(" ")
+        text = tokenize(text)
     count = {}
     for w in text:
         for l in stopwords:
@@ -57,14 +62,13 @@ def get_word_counts(text):
 
 
 def get_lang_scores(text):
-    count = get_word_counts(text.lower())
+    count = get_word_counts(text)
     # make scores sum up to 1
     total = sum(v for k, v in count.items())
     return {k: v / total for k, v in count.items()}
 
 
 def predict_lang(text):
-    scores = get_lang_scores(text.lower())
+    scores = get_lang_scores(text)
     top = max(v for k, v in scores.items())
     return [k for k, v in scores.items() if v == top]
-

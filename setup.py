@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='lingua_podre',
-    version='0.0.1',
+    version='0.0.2',
     packages=['lingua_podre'],
     url='https://github.com/OpenJarbas/lingua_podre',
     license='apache-2',
